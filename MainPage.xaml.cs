@@ -32,6 +32,16 @@ using Windows.UI.Xaml.Navigation;
 // https://www.youtube.com/watch?v=xJveKt99MXY
 // https://github.com/jQuery2DotNet/UWP-Samples
 
+// Ref Storage
+// https://code.msdn.microsoft.com/windowsapps/Sqlite-Sample-for-Windows-ad3af7ae
+
+/*
+ * Wheather
+ * https://channel9.msdn.com/Series/Windows-10-development-for-absolute-beginners/UWP-058-UWP-Weather-Setup-and-Working-with-the-Weather-API
+     
+     */
+
+
 
 namespace PointMe
 {
