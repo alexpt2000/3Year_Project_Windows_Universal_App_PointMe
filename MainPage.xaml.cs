@@ -40,6 +40,9 @@ namespace PointMe
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+        MessageDialog msgDialog = new MessageDialog("Standard Message");
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -57,7 +60,6 @@ namespace PointMe
 
         private async void InitializeLocator()
         {
-            MessageDialog msgDialog = new MessageDialog("Standard Message");
             var userPermission = await Geolocator.RequestAccessAsync();
 
             switch (userPermission)
@@ -66,21 +68,34 @@ namespace PointMe
                     Geolocator geolocator = new Geolocator();
                     Geoposition locationGPS = await geolocator.GetGeopositionAsync();
                     AddMapIcon(locationGPS);
-
                     break;
 
                 case GeolocationAccessStatus.Denied:
                     msgDialog.Content = "I cannot check the location if you don't give me the access to your location...";
+                    MyMap_Loaded();
                     await msgDialog.ShowAsync();
                     break;
 
                 case GeolocationAccessStatus.Unspecified:
                     msgDialog.Content = "I got an error while getting location permission. Please try again...";
+                    MyMap_Loaded();
                     await msgDialog.ShowAsync();
                     break;
 
             }
-            
+        
+        }
+
+
+        private void MyMap_Loaded()
+        {
+            BasicGeoposition location = new BasicGeoposition();
+
+            location.Latitude = 53.27058;
+            location.Longitude = -9.065248;
+
+            mapWithMyLocation.Center = new Geopoint(location);
+            mapWithMyLocation.ZoomLevel = 9;
         }
 
         private void AddMapIcon(Geoposition locationGPS)
@@ -100,6 +115,17 @@ namespace PointMe
             mapIcon.Title = "GMIT";
             mapWithMyLocation.MapElements.Add(mapIcon);
             mapWithMyLocation.Center = new Geopoint(location);
+           
+        }
+
+
+        private void mapWithMyLocation_MapHolding(MapControl sender, MapInputEventArgs args)
+        {
+            var tappedGeoPosition = args.Location.Position;
+            string status = "MapTapped at \n\nLatitude:" + tappedGeoPosition.Latitude + "\nLongitude: " + tappedGeoPosition.Longitude;
+
+            msgDialog.Content = status;
+            msgDialog.ShowAsync();
         }
     }
 }

@@ -36,7 +36,8 @@
 
                 <Maps:MapControl x:Name="mapWithMyLocation"
                              ZoomInteractionMode="GestureAndControl"
-                             TiltInteractionMode="GestureAndControl"  
+                             TiltInteractionMode="GestureAndControl"
+                             MapHolding="mapWithMyLocation_MapHolding"
                              MapServiceToken="BdXLS7E6SNZdhiVNWQzP~5ZaKLuzxAUJnSij-qCmJCw~AvuftOLSQhX-sgYwDxp-hcbUb0QaVEhGoFzYijoW44ilPgX5Y1dEVtgH3AEK2fEE"  ZoomLevel="8"  />
 
             </Grid>
