@@ -8,39 +8,48 @@
     xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
     mc:Ignorable="d">
 
-    <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
-               CompactPaneLength="50" OpenPaneLength="150">
-        <SplitView.Pane>
-            <StackPanel Background="Black">
-                <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
-                    Width="50" Height="50" Click="HamburgerButton_Click" Foreground="White">
-                    <Button.Background>
-                        <SolidColorBrush Color="{ThemeResource SystemBaseHighColor}"/>
-                    </Button.Background>
-                </Button>
 
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="Home" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
-                        Width="50" Height="50" Background="Transparent" Foreground="White"/>
-                    <TextBlock Text="Home" FontSize="18" VerticalAlignment="Center" Foreground="White" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="MyPoints" FontFamily="Segoe MDL2 Assets" Content="&#xE1D6;"
-                        Width="50" Height="50" Background="Transparent" Foreground="White"/>
-                    <TextBlock Text="My Points" FontSize="18" VerticalAlignment="Center" Foreground="White" />
-                </StackPanel>
-            </StackPanel>
-        </SplitView.Pane>
-        <SplitView.Content>
-            <Grid>
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
 
-                <Maps:MapControl x:Name="mapWithMyLocation"
+
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="0">
+
+            <Maps:MapControl x:Name="mapWithMyLocation"
                              ZoomInteractionMode="GestureAndControl"
                              TiltInteractionMode="GestureAndControl"
                              MapHolding="mapWithMyLocation_MapHolding"
                              MapServiceToken="BdXLS7E6SNZdhiVNWQzP~5ZaKLuzxAUJnSij-qCmJCw~AvuftOLSQhX-sgYwDxp-hcbUb0QaVEhGoFzYijoW44ilPgX5Y1dEVtgH3AEK2fEE"  ZoomLevel="8"  />
+        </Grid>
 
-            </Grid>
-        </SplitView.Content>
-    </SplitView>
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0">
+
+            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="º" FontFamily="Symbol" FontSize="24" Height="41" Width="47">
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Display Streetside views" Click="MenuFlyoutItem_ClickAsync"/>
+                        <MenuFlyoutItem Text="Display aerial 3D" Click="MenuFlyoutItem_Click_1"/>
+                        <MenuFlyoutSeparator/>
+                        <MenuFlyoutSubItem Text="Item 3">
+                            <MenuFlyoutItem Text="Item 4"/>
+                            <MenuFlyoutSubItem Text="Item 5">
+                                <MenuFlyoutItem Text="Item 6"/>
+                                <MenuFlyoutItem Text="Item 7"/>
+                            </MenuFlyoutSubItem>
+                        </MenuFlyoutSubItem>
+                        <MenuFlyoutSeparator/>
+                        <ToggleMenuFlyoutItem Text="Toggle Menu Item 1"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+
+        </StackPanel>
+
+    </Grid>
 </Page>
