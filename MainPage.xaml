@@ -30,21 +30,18 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0">
 
-            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="º" FontFamily="Symbol" FontSize="24" Height="41" Width="47">
+            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="º" FontFamily="Symbol" FontSize="24" Height="41" Width="47" Foreground="White" Background="Black">
                 <Button.Flyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem Text="Display Streetside views" Click="MenuFlyoutItem_ClickAsync"/>
-                        <MenuFlyoutItem Text="Display aerial 3D" Click="MenuFlyoutItem_Click_1"/>
+                        <MenuFlyoutItem Text="Add Favorite Points" Click="MenuFlyoutItem_Click"/>
+                        <MenuFlyoutItem Text="List Favorite Points" Click="MenuFlyoutItem_Click_1"/>
                         <MenuFlyoutSeparator/>
-                        <MenuFlyoutSubItem Text="Item 3">
-                            <MenuFlyoutItem Text="Item 4"/>
-                            <MenuFlyoutSubItem Text="Item 5">
-                                <MenuFlyoutItem Text="Item 6"/>
-                                <MenuFlyoutItem Text="Item 7"/>
-                            </MenuFlyoutSubItem>
+                        <MenuFlyoutSubItem Text="Map Style">
+                            <MenuFlyoutItem Text="Road" Click="NormalMap_Click"/>
+                            <MenuFlyoutItem Text="Display Terrain" Click="TerrainMap_Click"/>
+                            <MenuFlyoutItem Text="Display aerial 3D" Click="Arial3D_Click"/>
                         </MenuFlyoutSubItem>
-                        <MenuFlyoutSeparator/>
-                        <ToggleMenuFlyoutItem Text="Toggle Menu Item 1"/>
+
                     </MenuFlyout>
                 </Button.Flyout>
             </Button>
