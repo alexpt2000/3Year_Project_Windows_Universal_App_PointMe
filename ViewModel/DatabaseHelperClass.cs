@@ -23,6 +23,8 @@ namespace SqliteUWP.ViewModel
                 }
             }
         }
+
+
         private async Task<bool> CheckFileExists(string fileName)
         {
             try
@@ -35,18 +37,22 @@ namespace SqliteUWP.ViewModel
                 return false;
             }
         }
-        // Insert the new contact in the Contacts table. 
-        public void Insert(Points objContact)
+
+
+        // Insert the new Point in the Points table. 
+        public void Insert(Points objPoint)
         {
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
             {
                 conn.RunInTransaction(() =>
                 {
-                    conn.Insert(objContact);
+                    conn.Insert(objPoint);
                 });
             }
         }
-        // Retrieve the specific contact from the database.   
+
+
+        // Retrieve the specific Point from the database.   
         public Points ReadPoint(int pointid)
         {
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
@@ -55,6 +61,8 @@ namespace SqliteUWP.ViewModel
                 return existingconact;
             }
         }
+
+
         public ObservableCollection<Points> ReadAllPoints()
         {
             try
@@ -62,8 +70,8 @@ namespace SqliteUWP.ViewModel
                 using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
                 {
                     List<Points> myCollection = conn.Table<Points>().ToList<Points>();
-                    ObservableCollection<Points> PointtsList = new ObservableCollection<Points>(myCollection);
-                    return PointtsList;
+                    ObservableCollection<Points> PointsList = new ObservableCollection<Points>(myCollection);
+                    return PointsList;
                 }
             }
             catch
@@ -72,7 +80,9 @@ namespace SqliteUWP.ViewModel
             }
 
         }
-        //Update existing conatct 
+
+
+        //Update existing point 
         public void UpdateDetails(Points ObjPoint)
         {
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
@@ -90,7 +100,9 @@ namespace SqliteUWP.ViewModel
 
             }
         }
-        //Delete all contactlist or delete Contacts table   
+
+
+        //Delete all points or delete Points table   
         public void DeleteAllPoint()
         {
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
@@ -103,7 +115,9 @@ namespace SqliteUWP.ViewModel
 
             }
         }
-        //Delete specific contact   
+
+
+        //Delete specific point   
         public void DeletePoint(int Id)
         {
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))

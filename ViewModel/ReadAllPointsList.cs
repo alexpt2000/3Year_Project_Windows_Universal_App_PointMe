@@ -11,6 +11,7 @@ namespace SqliteUWP.ViewModel
     public class ReadAllPointsList
     {
         DatabaseHelperClass Db_Helper = new DatabaseHelperClass();
+
         public ObservableCollection<Points> GetAllPoints()
         {
             return Db_Helper.ReadAllPoints();

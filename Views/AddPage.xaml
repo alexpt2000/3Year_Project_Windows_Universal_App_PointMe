@@ -22,8 +22,10 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
                 <TextBox x:Name="pointNametxtBx" Margin="10" Header="Point Name"/>
+                <TextBox x:Name="pointNotestxtBx" Margin="10" Header="Point Note"/>
                 <TextBox x:Name="latitudetxtBx" Margin="10" MaxLength="10" Header="Latitude" />
                 <TextBox x:Name="LongitudetxtBx" Margin="10" MaxLength="10" Header="Longitude" />
+                
                 <Button Content="Add Point" Margin="10" HorizontalAlignment="Stretch" Click="AddPoint_Click"/>
             </StackPanel>
         </Grid>

@@ -28,6 +28,7 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="1" Name="EditView">
                 <TextBox x:Name="pointNametxtBx" Margin="10" Header="Point Name"/>
+                <TextBox x:Name="pointNotestxtBx" Margin="10" Header="Point Note"/>
                 <TextBox x:Name="latitudetxtBx" Margin="10" MaxLength="10" Header="Latitude" />
                 <TextBox x:Name="longitudeTxtBx" Margin="10" MaxLength="10" Header="Longitude" />
             </StackPanel>

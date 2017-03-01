@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -26,16 +27,24 @@ namespace SqliteUWP.Views
     /// </summary>
     public sealed partial class AddPage : Page
     {
+ 
         public AddPage()
         {
             this.InitializeComponent();
         }
+
+
+
         private async void AddPoint_Click(object sender, RoutedEventArgs e)
         {
+
             DatabaseHelperClass Db_Helper = new DatabaseHelperClass();//Creating object for DatabaseHelperClass.cs from ViewModel/DatabaseHelperClass.cs  
-            if (pointNametxtBx.Text != "" & latitudetxtBx.Text != "" & LongitudetxtBx.Text != "") 
-            { 
-                Db_Helper.Insert(new Points(pointNametxtBx.Text, latitudetxtBx.Text, LongitudetxtBx.Text)); 
+            if (pointNametxtBx.Text != "" & pointNotestxtBx.Text != "" & latitudetxtBx.Text != "" & LongitudetxtBx.Text != "") 
+            {
+
+               
+
+                Db_Helper.Insert(new Points(pointNametxtBx.Text, pointNotestxtBx.Text, latitudetxtBx.Text, LongitudetxtBx.Text)); 
                 Frame.Navigate(typeof(MainPage));//after add point redirect to point listbox page  
             } 
             else 

@@ -30,10 +30,10 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Add Point"  Margin="5" HorizontalAlignment="Stretch" Click="AddPoint_Click"/>
-                <Button Grid.Column="1" Name="btnDelete" IsEnabled="False" Content="DeleteAll" Margin="5" HorizontalAlignment="Stretch" Click="DeleteAll_Click"/>
+                <!-- <Button Grid.Column="0" Content="Add Point"  Margin="5" HorizontalAlignment="Stretch" Click="AddPoint_Click"/> -->
+                <!-- <Button Grid.Column="1" Name="btnDelete" IsEnabled="False" Content="DeleteAll" Margin="5" HorizontalAlignment="Stretch" Click="DeleteAll_Click"/> -->
             </Grid>
-            <ListView BorderBrush="#FF141EE4"  Grid.Row="1" x:Name="listBoxobj" SelectionChanged="listBoxobj_SelectionChanged">
+            <ListView BorderBrush="#FF141EE4"  Grid.Row="3" x:Name="listBoxobj" SelectionChanged="listBoxobj_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -44,11 +44,12 @@
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <TextBlock Margin="5,0,0,0" Grid.Row="0" x:Name="PointNameTxt" TextWrapping="Wrap" Text="{Binding pointName}" FontSize="28" Foreground="DarkGray"/>
-                                    <!--<TextBlock Grid.Row="0" Text=">" FontSize="28"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="DarkGray"/> -->
-                                    <TextBlock Margin="5,0,0,0" Grid.Row="1" x:Name="LatitudeTxt"  TextWrapping="Wrap" Foreground="Gray" FontSize="12" Text="{Binding latitude}" />
-                                    <TextBlock Margin="125,0,0,0" Grid.Row="1" x:Name="LongitudeTxt"  TextWrapping="Wrap" Foreground="Gray" FontSize="12" Text="{Binding longitude}" />
+                                    <TextBlock Margin="5,0,0,0" Grid.Row="1" x:Name="PointNotesTxt" TextWrapping="Wrap" Text="{Binding notes}" FontSize="20" Foreground="DarkGray"/>
+                                    <!-- <TextBlock Margin="5,0,0,0" Grid.Row="2" x:Name="LatitudeLabel"  TextWrapping="Wrap" Foreground="Gray" FontSize="12" Text="Lat.:" /> -->
+                                    <!-- <TextBlock Margin="35,0,0,0" Grid.Row="2" x:Name="LatitudeTxt"  TextWrapping="Wrap" Foreground="Gray" FontSize="12" Text="{Binding latitude}" /> -->
+                                    <!-- <TextBlock Margin="120,0,0,0" Grid.Row="2" x:Name="LongitudeLabel"  TextWrapping="Wrap" Foreground="Gray" FontSize="12" Text="Long.:" /> -->
+                                    <!-- <TextBlock Margin="165,0,0,0" Grid.Row="2" x:Name="LongitudeTxt"  TextWrapping="Wrap" Foreground="Gray" FontSize="12" Text="{Binding longitude}" /> -->
 
-                                    <!--<TextBlock HorizontalAlignment="Right" Margin="0,0,35,0" Grid.Row="3" x:Name="CreateddateTxt" Foreground="White" FontSize="18" TextWrapping="Wrap" Text="{Binding CreationDate}" />-->
                                 </Grid>
                             </Border>
                         </Grid>

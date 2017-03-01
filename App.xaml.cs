@@ -35,14 +35,14 @@ namespace PointMe
         /// </summary>
         /// 
 
-        public static string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "PointsManager.sqlite"));//DataBase Name 
+        public static string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "PointsDB.sqlite"));//DataBase Name 
 
         public App()
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            if (!CheckFileExists("PointsManager.sqlite").Result)
+            if (!CheckFileExists("PointsDB.sqlite").Result)
             {
                 using (var db = new SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), DB_PATH))
                 {

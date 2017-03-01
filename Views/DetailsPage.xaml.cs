@@ -36,6 +36,7 @@ namespace SqliteUWP.Views
             currentPoint = e.Parameter as Points;
             //currentcontact = Db_Helper.ReadPoint(Selected_PointId);//Read selected DB point
             pointNametxtBx.Text = currentPoint.pointName;//get point Name
+            pointNotestxtBx.Text = currentPoint.notes;
             latitudetxtBx.Text = currentPoint.latitude;
             longitudeTxtBx.Text = currentPoint.longitude;
         }
@@ -43,6 +44,7 @@ namespace SqliteUWP.Views
         private void UpdatePoint_Click(object sender, RoutedEventArgs e)
         {
             currentPoint.pointName = pointNametxtBx.Text;
+            currentPoint.notes = pointNotestxtBx.Text;
             currentPoint.latitude = latitudetxtBx.Text;
             currentPoint.longitude = longitudeTxtBx.Text;
             Db_Helper.UpdateDetails(currentPoint);//Update selected DB poin Id

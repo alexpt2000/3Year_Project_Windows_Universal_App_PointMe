@@ -12,6 +12,7 @@ namespace SqliteUWP.Model
         [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
         public int Id { get; set; }
         public string pointName { get; set; }
+        public string notes { get; set; }
         public string latitude { get; set; }
         public string longitude { get; set; }
 
@@ -19,9 +20,10 @@ namespace SqliteUWP.Model
         {
             //empty constructor
         }
-        public Points(string pointName, string latitude, string longitude)
+        public Points(string pointName, string notes, string latitude, string longitude)
         {
             this.pointName = pointName;
+            this.notes = notes;
             this.latitude = latitude;
             this.longitude = longitude;
         }

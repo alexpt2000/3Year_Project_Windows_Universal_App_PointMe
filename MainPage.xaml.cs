@@ -1,4 +1,6 @@
-﻿using SqliteUWP.Views;
+﻿using SqliteUWP.Model;
+using SqliteUWP.ViewModel;
+using SqliteUWP.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -125,19 +127,6 @@ namespace PointMe
         }
 
 
-        private void mapWithMyLocation_MapHolding(MapControl sender, MapInputEventArgs args)
-        {
-            var tappedGeoPosition = args.Location.Position;
-            string status = "MapTapped at \n\nLatitude:" + tappedGeoPosition.Latitude + "\nLongitude: " + tappedGeoPosition.Longitude;
-
-            msgDialog.Content = status;
-            msgDialog.ShowAsync();
-        }
-
-
-
-
-
         private void Arial3D_Click(object sender, RoutedEventArgs e)
         {
             if (mapWithMyLocation.Is3DSupported)
@@ -172,15 +161,111 @@ namespace PointMe
 
         }
 
-        private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        private void ShowMap_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AddPage));
+            this.Frame.Navigate(typeof(MainPage));
 
         }
 
-        private void MenuFlyoutItem_Click_1(object sender, RoutedEventArgs e)
+        private void ListPoints_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(ListPoints));
         }
+
+
+
+
+
+        private async void mapWithMyLocation_MapHolding(MapControl sender, MapInputEventArgs args)
+        {
+            var tappedGeoPosition = args.Location.Position;
+
+            // Creates the text box
+            var PointName = new TextBox {Margin = new Thickness(10), PlaceholderText = "Point Name"};
+            var PointNotes = new TextBox {Margin = new Thickness(10), PlaceholderText = "Point Notes" };
+
+            // Creates the StackPanel with the content
+            var contentPanel = new StackPanel();
+            contentPanel.Children.Add(new TextBlock
+            {
+                Text = "Enter your Point Name and Note",
+                Margin = new Thickness(10),
+                TextWrapping = TextWrapping.WrapWholeWords
+            });
+            contentPanel.Children.Add(PointName);
+            contentPanel.Children.Add(PointNotes);
+
+            // Creates the Point dialog
+            ContentDialog _pointDialog = new ContentDialog
+            {
+                PrimaryButtonText = "Save",
+                IsPrimaryButtonEnabled = false,
+                SecondaryButtonText = "Exit",
+                Title = "Save Point",
+                Content = contentPanel
+            };
+
+            // Report that the dialog has been opened to avoid overlapping
+            _pointDialog.Opened += delegate
+            {
+                // HACK - opacity set to 0 to avoid seeing behind dialog
+                Window.Current.Content.Opacity = 1;
+            };
+
+            // Report that the dialog has been closed to enable it again
+            _pointDialog.Closed += delegate
+            {
+                // HACK - opacity set to 1 to reset the window to original options
+                Window.Current.Content.Opacity = 1;
+            };
+
+            // Clear inserted password for next logins
+            _pointDialog.PrimaryButtonClick += delegate
+            {
+
+
+                DatabaseHelperClass Db_Helper = new DatabaseHelperClass();//Creating object for DatabaseHelperClass.cs from ViewModel/DatabaseHelperClass.cs  
+                if (PointName != null)
+                {
+                    Double latitude = tappedGeoPosition.Latitude;
+                    Double longitude = tappedGeoPosition.Longitude;
+
+                    //Db_Helper.Insert(new Points(PointName.Text, PointNotes.Text, (latitude / 1000000).ToString().Replace('.', ','), (longitude / 1000000).ToString().Replace('.', ',')));
+                    Db_Helper.Insert(new Points(PointName.Text, PointNotes.Text, tappedGeoPosition.Latitude.ToString(), tappedGeoPosition.Longitude.ToString()));
+
+                    Frame.Navigate(typeof(MainPage));//after add point redirect to point listbox page  
+                }
+                else
+                {
+                    //MessageDialog messageDialog = new MessageDialog("Please fill the field Point Name");//Text should not be empty  
+                    //await messageDialog.ShowAsync();
+                }
+
+
+            };
+
+            // Close the app if the user doesn't insert the point
+            _pointDialog.SecondaryButtonClick += delegate { Application.Current.Exit(); };
+
+            // Set the binding to enable/disable the accept button 
+
+            _pointDialog.SetBinding(ContentDialog.IsPrimaryButtonEnabledProperty, new Binding
+            {
+                Source = PointName,
+                Path = new PropertyPath("Point"),
+                Mode = BindingMode.TwoWay
+            });
+
+            var result = await _pointDialog.ShowAsync();
+  
+        }
+
+
+
+
+
+
+
+
     }
 }
