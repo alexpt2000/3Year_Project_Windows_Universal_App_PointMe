@@ -64,8 +64,6 @@ namespace PointMe
 
         }
 
-
-
         private async void InitializeLocator()
         {
             var userPermission = await Geolocator.RequestAccessAsync();
@@ -75,7 +73,14 @@ namespace PointMe
                 case GeolocationAccessStatus.Allowed:
                     Geolocator geolocator = new Geolocator();
                     Geoposition locationGPS = await geolocator.GetGeopositionAsync();
-                    AddMapIcon(locationGPS);
+
+                    BasicGeoposition location = new BasicGeoposition();
+
+                    location.Latitude = locationGPS.Coordinate.Latitude;
+                    location.Longitude = locationGPS.Coordinate.Longitude;
+
+                    MyMap_Location(location);
+
                     break;
 
                 case GeolocationAccessStatus.Denied:
@@ -94,6 +99,12 @@ namespace PointMe
         
         }
 
+        private void MyMap_Location(BasicGeoposition location)
+        {
+            mapWithMyLocation.Center = new Geopoint(location);
+            mapWithMyLocation.ZoomLevel = 9;
+        }
+
 
         private void MyMap_Loaded()
         {
@@ -106,24 +117,21 @@ namespace PointMe
             mapWithMyLocation.ZoomLevel = 9;
         }
 
-        private void AddMapIcon(Geoposition locationGPS)
+        private void AddMapIcon(BasicGeoposition location, string pointName)
         {
-            BasicGeoposition location = new BasicGeoposition();
 
-            location.Latitude = locationGPS.Coordinate.Point.Position.Latitude;
-            location.Longitude = locationGPS.Coordinate.Point.Position.Longitude;
+            // Specify a known location.
+            Geopoint snPoint = new Geopoint(location);
 
-            MapIcon mapIcon;
-            mapIcon = new MapIcon();
-            if (mapIcon != null)
-            {
-                mapWithMyLocation.MapElements.Remove(mapIcon);
-            }
-            mapIcon.Location = new Geopoint(location);
-            mapIcon.Title = "GMIT";
-            mapWithMyLocation.MapElements.Add(mapIcon);
-            mapWithMyLocation.Center = new Geopoint(location);
-           
+            // Create a MapIcon.
+            MapIcon mapIcon1 = new MapIcon();
+            mapIcon1.Location = snPoint;
+            mapIcon1.NormalizedAnchorPoint = new Point(0.5, 1.0);
+            mapIcon1.Title = pointName;
+            mapIcon1.ZIndex = 0;
+
+            // Add the MapIcon to the map.
+            mapWithMyLocation.MapElements.Add(mapIcon1);
         }
 
 
@@ -133,15 +141,12 @@ namespace PointMe
             {
                 // Set the aerial 3D view.
                 mapWithMyLocation.Style = MapStyle.Aerial3DWithRoads;
-
-
             }
             else
             {
                 // If 3D views are not supported, display dialog.
                 msgDialog.Content = "3D views are not supported.";
                 msgDialog.ShowAsync();
-
             }
 
         }
@@ -149,22 +154,13 @@ namespace PointMe
 
         private void NormalMap_Click(object sender, RoutedEventArgs e)
         {
-
             mapWithMyLocation.Style = MapStyle.Road;
-            
+        
         }
 
         private void TerrainMap_Click(object sender, RoutedEventArgs e)
         {
-
             mapWithMyLocation.Style = MapStyle.Terrain;
-
-        }
-
-        private void ShowMap_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(MainPage));
-
         }
 
         private void ListPoints_Click(object sender, RoutedEventArgs e)
@@ -172,13 +168,9 @@ namespace PointMe
             this.Frame.Navigate(typeof(ListPoints));
         }
 
-
-
-
-
         private async void mapWithMyLocation_MapHolding(MapControl sender, MapInputEventArgs args)
         {
-            var tappedGeoPosition = args.Location.Position;
+            BasicGeoposition tappedGeoPosition = args.Location.Position;
 
             // Creates the text box
             var PointName = new TextBox {Margin = new Thickness(10), PlaceholderText = "Point Name"};
@@ -223,17 +215,12 @@ namespace PointMe
             _pointDialog.PrimaryButtonClick += delegate
             {
 
-
                 DatabaseHelperClass Db_Helper = new DatabaseHelperClass();//Creating object for DatabaseHelperClass.cs from ViewModel/DatabaseHelperClass.cs  
                 if (PointName != null)
                 {
-                    Double latitude = tappedGeoPosition.Latitude;
-                    Double longitude = tappedGeoPosition.Longitude;
-
-                    //Db_Helper.Insert(new Points(PointName.Text, PointNotes.Text, (latitude / 1000000).ToString().Replace('.', ','), (longitude / 1000000).ToString().Replace('.', ',')));
                     Db_Helper.Insert(new Points(PointName.Text, PointNotes.Text, tappedGeoPosition.Latitude.ToString(), tappedGeoPosition.Longitude.ToString()));
 
-                    Frame.Navigate(typeof(MainPage));//after add point redirect to point listbox page  
+                    AddMapIcon(tappedGeoPosition, PointName.Text);
                 }
                 else
                 {
@@ -259,13 +246,6 @@ namespace PointMe
             var result = await _pointDialog.ShowAsync();
   
         }
-
-
-
-
-
-
-
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using SqliteUWP.Model;
+﻿using PointMe;
+using SqliteUWP.Model;
 using SqliteUWP.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace SqliteUWP.Views
             DB_PointsList = dbcpoints.GetAllPoints();//Get all DB points  
             if (DB_PointsList.Count > 0)
             {
-                btnDelete.IsEnabled = true;
+                //btnDelete.IsEnabled = true;
             }
             listBoxobj.ItemsSource = DB_PointsList.OrderByDescending(i => i.Id).ToList();//Binding DB data to LISTBOX and Latest points ID can Display first.  
         }
@@ -57,13 +58,21 @@ namespace SqliteUWP.Views
             DatabaseHelperClass delete = new DatabaseHelperClass();
             delete.DeleteAllPoint();//delete all DB points
             DB_PointsList.Clear();//Clear collections
-            btnDelete.IsEnabled = false;
+            //btnDelete.IsEnabled = false;
             listBoxobj.ItemsSource = DB_PointsList;
         }
         private void AddPoint_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AddPage));
         }
+
+
+        private void ShowMap_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
+
+        }
+
     }
 }
 

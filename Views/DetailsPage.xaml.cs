@@ -1,4 +1,5 @@
-﻿using SqliteUWP.Model;
+﻿using PointMe;
+using SqliteUWP.Model;
 using SqliteUWP.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,13 @@ namespace SqliteUWP.Views
         {
             Db_Helper.DeletePoint(currentPoint.Id);//Delete selected DB point Id.
             Frame.Navigate(typeof(ListPoints));
+        }
+
+
+        private void ShowMap_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
+
         }
     }
 }

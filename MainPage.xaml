@@ -33,7 +33,6 @@
             <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="º" FontFamily="Symbol" FontSize="24" Height="41" Width="47" Foreground="White" Background="Black">
                 <Button.Flyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem Text="Map" Click="ShowMap_Click"/>
                         <MenuFlyoutItem Text="List Favorite Points" Click="ListPoints_Click"/>
                         <MenuFlyoutSeparator/>
                         <MenuFlyoutSubItem Text="Map Style">

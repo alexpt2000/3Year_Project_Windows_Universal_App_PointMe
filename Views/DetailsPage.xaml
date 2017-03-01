@@ -16,7 +16,7 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Delete/Update Point" FontSize="28" Margin="9,-7,0,0" />
+            <TextBlock Text="Delete/Update Point" FontSize="28" Margin="50,-7,0,0" />
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -29,14 +29,30 @@
             <StackPanel Grid.Row="1" Name="EditView">
                 <TextBox x:Name="pointNametxtBx" Margin="10" Header="Point Name"/>
                 <TextBox x:Name="pointNotestxtBx" Margin="10" Header="Point Note"/>
-                <TextBox x:Name="latitudetxtBx" Margin="10" MaxLength="10" Header="Latitude" />
-                <TextBox x:Name="longitudeTxtBx" Margin="10" MaxLength="10" Header="Longitude" />
+                <TextBox x:Name="latitudetxtBx" Margin="10" MaxLength="10" Header="Latitude" IsReadOnly="True" Background="Gray"/>
+                <TextBox x:Name="longitudeTxtBx" Margin="10" MaxLength="10" Header="Longitude" IsReadOnly="True" Background="Gray"/>
+
             </StackPanel>
             <StackPanel Grid.Row="2">
                 <Button Content="Delete" HorizontalAlignment="Stretch" Margin="10" Click="DeletePoint_Click"/>
                 <Button Content="Update" HorizontalAlignment="Stretch" Margin="10" Click="UpdatePoint_Click"/>
             </StackPanel>
         </Grid>
+
+        <StackPanel Grid.Row="0">
+
+            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="º" FontFamily="Symbol" FontSize="24" Height="41" Width="47" Foreground="White" Background="Black">
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Map" Click="ShowMap_Click"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+
+        </StackPanel>
+
+
+
     </Grid>
 
 </Page>

@@ -16,7 +16,7 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="My list Points" TextWrapping="Wrap" Margin="9,-7,0,0" FontSize="28"/>
+            <TextBlock Text="My list Points" TextWrapping="Wrap" Margin="50,-7,0,0" FontSize="28"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -37,7 +37,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <Border Margin="5" BorderBrush="White" BorderThickness="1">
+                            <Border Margin="5" BorderBrush="White" BorderThickness="0">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -63,5 +63,19 @@
             </ListView>
 
         </Grid>
+
+        <StackPanel Grid.Row="0">
+
+            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="º" FontFamily="Symbol" FontSize="24" Height="41" Width="47" Foreground="White" Background="Black">
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Map" Click="ShowMap_Click"/>
+                       </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+
+        </StackPanel>
+
+
     </Grid>
 </Page>
