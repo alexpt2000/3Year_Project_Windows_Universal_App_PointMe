@@ -1,7 +1,8 @@
 ﻿<Page
-    x:Class="SqliteUWP.Views.HomePage"
+    x:Class="SqliteUWP.Views.ListPoints"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SqliteUWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -15,7 +16,7 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Read All contacts with listbox" TextWrapping="Wrap" Margin="9,-7,0,0" FontSize="28"/>
+            <TextBlock Text="My list Points" TextWrapping="Wrap" Margin="9,-7,0,0" FontSize="28"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -29,7 +30,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Add Contact"  Margin="5" HorizontalAlignment="Stretch" Click="AddContact_Click"/>
+                <Button Grid.Column="0" Content="Add Point"  Margin="5" HorizontalAlignment="Stretch" Click="AddPoint_Click"/>
                 <Button Grid.Column="1" Name="btnDelete" IsEnabled="False" Content="DeleteAll" Margin="5" HorizontalAlignment="Stretch" Click="DeleteAll_Click"/>
             </Grid>
             <ListView BorderBrush="#FF141EE4"  Grid.Row="1" x:Name="listBoxobj" SelectionChanged="listBoxobj_SelectionChanged">
@@ -42,9 +43,11 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Margin="5,0,0,0" Grid.Row="0" x:Name="NameTxt" TextWrapping="Wrap" Text="{Binding Name}" FontSize="28" Foreground="White"/>
-                                    <TextBlock Grid.Row="0" Text=">" FontSize="28"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White"/>
-                                    <TextBlock Margin="5,0,0,0" Grid.Row="1" x:Name="PhoneTxt"  TextWrapping="Wrap" Foreground="White" FontSize="18" Text="{Binding PhoneNumber}" />
+                                    <TextBlock Margin="5,0,0,0" Grid.Row="0" x:Name="PointNameTxt" TextWrapping="Wrap" Text="{Binding pointName}" FontSize="28" Foreground="DarkGray"/>
+                                    <!--<TextBlock Grid.Row="0" Text=">" FontSize="28"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="DarkGray"/> -->
+                                    <TextBlock Margin="5,0,0,0" Grid.Row="1" x:Name="LatitudeTxt"  TextWrapping="Wrap" Foreground="Gray" FontSize="12" Text="{Binding latitude}" />
+                                    <TextBlock Margin="125,0,0,0" Grid.Row="1" x:Name="LongitudeTxt"  TextWrapping="Wrap" Foreground="Gray" FontSize="12" Text="{Binding longitude}" />
+
                                     <!--<TextBlock HorizontalAlignment="Right" Margin="0,0,35,0" Grid.Row="3" x:Name="CreateddateTxt" Foreground="White" FontSize="18" TextWrapping="Wrap" Text="{Binding CreationDate}" />-->
                                 </Grid>
                             </Border>

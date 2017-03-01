@@ -180,7 +180,7 @@ namespace PointMe
 
         private void MenuFlyoutItem_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ListPage));
+            this.Frame.Navigate(typeof(ListPoints));
         }
     }
 }

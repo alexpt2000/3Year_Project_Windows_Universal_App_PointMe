@@ -26,6 +26,7 @@ namespace SqliteUWP.Views
     {
         DatabaseHelperClass Db_Helper = new DatabaseHelperClass();
         Points currentPoint = new Points();
+
         public DetailsPage()
         {
             this.InitializeComponent();
@@ -33,25 +34,25 @@ namespace SqliteUWP.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             currentPoint = e.Parameter as Points;
-            //currentcontact = Db_Helper.ReadContact(Selected_ContactId);//Read selected DB contact
-            pointNametxtBx.Text = currentPoint.pointName;//get contact Name
+            //currentcontact = Db_Helper.ReadPoint(Selected_PointId);//Read selected DB point
+            pointNametxtBx.Text = currentPoint.pointName;//get point Name
             latitudetxtBx.Text = currentPoint.latitude;
-            longitudeTxt.Text = currentPoint.longitude
-
-
+            longitudeTxtBx.Text = currentPoint.longitude;
         }
 
-        private void UpdateContact_Click(object sender, RoutedEventArgs e)
+        private void UpdatePoint_Click(object sender, RoutedEventArgs e)
         {
-            currentStudent.Name = NametxtBx.Text;
-            currentStudent.PhoneNumber = PhonetxtBx.Text;
-            Db_Helper.UpdateDetails(currentStudent);//Update selected DB contact Id
-            Frame.Navigate(typeof(HomePage));
+            currentPoint.pointName = pointNametxtBx.Text;
+            currentPoint.latitude = latitudetxtBx.Text;
+            currentPoint.longitude = longitudeTxtBx.Text;
+            Db_Helper.UpdateDetails(currentPoint);//Update selected DB poin Id
+            Frame.Navigate(typeof(ListPoints));
         }
-        private void DeleteContact_Click(object sender, RoutedEventArgs e)
+
+        private void DeletePoint_Click(object sender, RoutedEventArgs e)
         {
-            Db_Helper.DeleteContact(currentStudent.Id);//Delete selected DB contact Id.
-            Frame.Navigate(typeof(HomePage));
+            Db_Helper.DeletePoint(currentPoint.Id);//Delete selected DB point Id.
+            Frame.Navigate(typeof(ListPoints));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SqliteUWP.Model;
+using SqliteUWP.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,36 +18,36 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace PointMe.Views
+namespace SqliteUWP.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class ListPoints : Page
     {
-        ObservableCollection<Points> DB_ContactList = new ObservableCollection<Points>();
+        ObservableCollection<Points> DB_PointsList = new ObservableCollection<Points>();
 
         public ListPoints()
         {
             this.InitializeComponent();
-            this.Loaded += ReadContactList_Loaded;
+            this.Loaded += ReadPointsList_Loaded;
         }
-        private void ReadContactList_Loaded(object sender, RoutedEventArgs e)
+        private void ReadPointsList_Loaded(object sender, RoutedEventArgs e)
         {
-            ReadAllContactsList dbcontacts = new ReadAllContactsList();
-            DB_ContactList = dbcontacts.GetAllContacts();//Get all DB contacts  
-            if (DB_ContactList.Count > 0)
+            ReadAllPointsList dbcpoints = new ReadAllPointsList();
+            DB_PointsList = dbcpoints.GetAllPoints();//Get all DB points  
+            if (DB_PointsList.Count > 0)
             {
                 btnDelete.IsEnabled = true;
             }
-            listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Id).ToList();//Binding DB data to LISTBOX and Latest contact ID can Display first.  
+            listBoxobj.ItemsSource = DB_PointsList.OrderByDescending(i => i.Id).ToList();//Binding DB data to LISTBOX and Latest points ID can Display first.  
         }
 
         private void listBoxobj_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (listBoxobj.SelectedIndex != -1)
             {
-                Contacts listitem = listBoxobj.SelectedItem as Contacts;//Get slected listbox item contact ID
+                Points listitem = listBoxobj.SelectedItem as Points;//Get slected listbox item points ID
                 Frame.Navigate(typeof(DetailsPage), listitem);
             }
         }
@@ -54,15 +55,15 @@ namespace PointMe.Views
         private void DeleteAll_Click(object sender, RoutedEventArgs e)
         {
             DatabaseHelperClass delete = new DatabaseHelperClass();
-            delete.DeleteAllContact();//delete all DB contacts
-            DB_ContactList.Clear();//Clear collections
+            delete.DeleteAllPoint();//delete all DB points
+            DB_PointsList.Clear();//Clear collections
             btnDelete.IsEnabled = false;
-            listBoxobj.ItemsSource = DB_ContactList;
+            listBoxobj.ItemsSource = DB_PointsList;
         }
-        private void AddContact_Click(object sender, RoutedEventArgs e)
+        private void AddPoint_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AddPage));
         }
     }
 }
-}
+
