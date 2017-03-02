@@ -34,6 +34,7 @@ namespace SqliteUWP.Views
             this.InitializeComponent();
             this.Loaded += ReadPointsList_Loaded;
         }
+
         private void ReadPointsList_Loaded(object sender, RoutedEventArgs e)
         {
             ReadAllPointsList dbcpoints = new ReadAllPointsList();

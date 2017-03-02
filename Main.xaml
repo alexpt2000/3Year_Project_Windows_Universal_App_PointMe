@@ -1,0 +1,73 @@
+﻿<Page
+    x:Class="PointMe.Main"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PointMe"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    mc:Ignorable="d">
+
+    <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
+               CompactPaneLength="50" OpenPaneLength="250">
+
+        <SplitView.Pane>
+            <ScrollViewer VerticalScrollBarVisibility="Visible">
+                <StackPanel Background="Black">
+                    <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                    Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" Foreground="White"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE825;"
+                    Width="50" Height="50" Background="Transparent" Foreground="White"/>
+                        <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
+                        Width="50" Height="50" Background="Transparent" Foreground="White"/>
+                        <TextBlock Text="Button 2" FontSize="18" VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <ListView BorderBrush="#FF141EE4"  Grid.Row="3" x:Name="listBoxobj" SelectionChanged="listBoxobj_SelectionChanged">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid   ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                        <Border Margin="5" BorderBrush="White" BorderThickness="0">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Margin="35,0,0,0" x:Name="PointNameTxt" TextWrapping="Wrap" Text="{Binding pointName}" FontSize="18" Foreground="DarkGray" VerticalAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                        </ListView>
+
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Grid>
+                <Maps:MapControl x:Name="mapWithMyLocation"
+                             ZoomInteractionMode="GestureAndControl"
+                             TiltInteractionMode="GestureAndControl"
+                             MapHolding="mapWithMyLocation_MapHolding"
+                             MapServiceToken="BdXLS7E6SNZdhiVNWQzP~5ZaKLuzxAUJnSij-qCmJCw~AvuftOLSQhX-sgYwDxp-hcbUb0QaVEhGoFzYijoW44ilPgX5Y1dEVtgH3AEK2fEE"  ZoomLevel="8"  />
+
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
+</Page>
