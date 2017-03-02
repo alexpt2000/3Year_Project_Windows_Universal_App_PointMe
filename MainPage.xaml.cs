@@ -41,6 +41,9 @@ using Windows.UI.Xaml.Navigation;
 /*
  * Wheather
  * https://channel9.msdn.com/Series/Windows-10-development-for-absolute-beginners/UWP-058-UWP-Weather-Setup-and-Working-with-the-Weather-API
+ * 
+ * Navigate Page
+ * // https://channel9.msdn.com/Series/Windows-10-development-for-absolute-beginners/UWP-019-Working-with-Navigation
      
      */
 

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -61,6 +62,7 @@ namespace SqliteUWP.Views
             //btnDelete.IsEnabled = false;
             listBoxobj.ItemsSource = DB_PointsList;
         }
+
         private void AddPoint_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AddPage));
@@ -69,7 +71,8 @@ namespace SqliteUWP.Views
 
         private void ShowMap_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(MainPage));
+            Frame.Navigate(typeof(MainPage));
+            // https://channel9.msdn.com/Series/Windows-10-development-for-absolute-beginners/UWP-019-Working-with-Navigation
 
         }
 
