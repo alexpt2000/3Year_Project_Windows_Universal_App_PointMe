@@ -12,7 +12,7 @@
                CompactPaneLength="50" OpenPaneLength="250">
 
         <SplitView.Pane>
-            <ScrollViewer VerticalScrollBarVisibility="Visible">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Background="#FF007ACC">
                     <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
                     Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" Foreground="White"/>
@@ -22,37 +22,30 @@
                         <Button x:Name="MapLabel" Content="Map Arial 3D" FontSize="18" VerticalAlignment="Center" Background="Transparent" Foreground="White" Click="Arial3D_Click"/>
                     </StackPanel>
 
-                    <StackPanel x:Name="LisPointsMenu" Orientation="Horizontal">
+                    <StackPanel x:Name="LisPointsMenu" Orientation="Horizontal" Visibility="Collapsed">
                         <ListView x:Name="listBoxobj" SelectionChanged="listBoxobj_SelectionChanged">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <Button x:Name="MapFindBtn" FontFamily="Segoe MDL2 Assets" Content="&#xE819;" Width="50" Height="50" Background="Transparent" Foreground="White"/>
+                                        <Button x:Name="MapFindBtn" FontFamily="Segoe MDL2 Assets" Content="&#xE819;" Width="50" Height="50" Background="Transparent" Foreground="White" CommandParameter="{Binding Id}"  Click="listPoint_SelectionChanged"/>
                                         <TextBlock Margin="55,0,0,0" x:Name="PointNameTxt" TextWrapping="Wrap" Text="{Binding pointName}" FontSize="18" Foreground="White" VerticalAlignment="Center" SelectionHighlightColor="#FF007ACC"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
-
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                </Style>
-                            </ListView.ItemContainerStyle>
-
                         </ListView>
-
                     </StackPanel>
+
                 </StackPanel>
             </ScrollViewer>
 
         </SplitView.Pane>
         <SplitView.Content>
-            <Grid>
+            <Grid GotFocus="Grid_GotFocus">
                 <Maps:MapControl x:Name="mapWithMyLocation"
                              ZoomInteractionMode="GestureAndControl"
                              TiltInteractionMode="GestureAndControl"
                              MapTapped="mapWithMyLocation_MapHolding"
-                             MapServiceToken="BdXLS7E6SNZdhiVNWQzP~5ZaKLuzxAUJnSij-qCmJCw~AvuftOLSQhX-sgYwDxp-hcbUb0QaVEhGoFzYijoW44ilPgX5Y1dEVtgH3AEK2fEE"  ZoomLevel="8"  />
+                             MapServiceToken="BdXLS7E6SNZdhiVNWQzP~5ZaKLuzxAUJnSij-qCmJCw~AvuftOLSQhX-sgYwDxp-hcbUb0QaVEhGoFzYijoW44ilPgX5Y1dEVtgH3AEK2fEE"  ZoomLevel="8" GotFocus="Grid_GotFocus"/>
 
             </Grid>
         </SplitView.Content>

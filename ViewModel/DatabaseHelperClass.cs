@@ -57,8 +57,8 @@ namespace SqliteUWP.ViewModel
         {
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
             {
-                var existingconact = conn.Query<Points>("select * from Points where Id =" + pointid).FirstOrDefault();
-                return existingconact;
+                var existingPoint = conn.Query<Points>("select * from Points where Id =" + pointid).FirstOrDefault();
+                return existingPoint;
             }
         }
 

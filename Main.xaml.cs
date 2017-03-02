@@ -4,6 +4,7 @@ using SqliteUWP.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -34,6 +35,7 @@ namespace PointMe
         MessageDialog msgDialog = new MessageDialog("Standard Message");
         ReadAllPointsList dbcpoints = new ReadAllPointsList();
         BasicGeoposition location = new BasicGeoposition();
+        DatabaseHelperClass Db_FindOne = new DatabaseHelperClass();
 
         public Main()
         {
@@ -129,10 +131,29 @@ namespace PointMe
                 AddMapIcon(location, data.pointName);
             }
 
+            
+        }
+
+        private void listPoint_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            Button myId = (Button)sender;
+            string myIdString = myId.CommandParameter.ToString();
+            int value = Int32.Parse(myIdString);
+
+            Points listitem = Db_FindOne.ReadPoint(value) as Points;
+
+            BasicGeoposition location = new BasicGeoposition();
+            location.Latitude = Double.Parse(listitem.latitude);
+            location.Longitude = Double.Parse(listitem.longitude);
+            mapWithMyLocation.Center = new Geopoint(location);
+            mapWithMyLocation.ZoomLevel = 15;
+
         }
 
         private void listBoxobj_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
+
             if (listBoxobj.SelectedIndex != -1)
             {
                 Points listitem = listBoxobj.SelectedItem as Points;//Get slected listbox item points ID
@@ -143,7 +164,21 @@ namespace PointMe
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
-            
+            //LisPointsMenu.Visibility = Visibility.Visible;
+
+            if (LisPointsMenu.Visibility == Visibility.Visible)
+            {
+                LisPointsMenu.Visibility = Visibility.Collapsed;
+            }
+            else {
+                LisPointsMenu.Visibility = Visibility.Visible;
+            }
+
+        }
+
+        private void Grid_GotFocus(object sender, RoutedEventArgs e)
+        {
+            LisPointsMenu.Visibility = Visibility.Collapsed;
         }
 
 
@@ -265,12 +300,14 @@ namespace PointMe
                 mapWithMyLocation.Style = MapStyle.Aerial3DWithRoads;
                 MapLabel.Content = "Map Road";
             }
-            else {
+            else
+            {
                 mapWithMyLocation.Style = MapStyle.Road;
                 MapLabel.Content = "Map Arial 3D";
-            }      
+            }
 
         }
+
 
     }
 }
