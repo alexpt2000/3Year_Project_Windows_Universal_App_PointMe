@@ -49,19 +49,19 @@ namespace SqliteUWP.Views
             currentPoint.latitude = latitudetxtBx.Text;
             currentPoint.longitude = longitudeTxtBx.Text;
             Db_Helper.UpdateDetails(currentPoint);//Update selected DB poin Id
-            Frame.Navigate(typeof(ListPoints));
+            Frame.Navigate(typeof(Main));
         }
 
         private void DeletePoint_Click(object sender, RoutedEventArgs e)
         {
             Db_Helper.DeletePoint(currentPoint.Id);//Delete selected DB point Id.
-            Frame.Navigate(typeof(ListPoints));
+            Frame.Navigate(typeof(Main));
         }
 
 
         private void ShowMap_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(MainPage));
+            this.Frame.Navigate(typeof(Main));
 
         }
     }

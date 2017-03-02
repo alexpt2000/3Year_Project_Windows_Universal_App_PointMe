@@ -13,35 +13,22 @@
 
         <SplitView.Pane>
             <ScrollViewer VerticalScrollBarVisibility="Visible">
-                <StackPanel Background="Black">
+                <StackPanel Background="#FF007ACC">
                     <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
                     Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" Foreground="White"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE825;"
-                    Width="50" Height="50" Background="Transparent" Foreground="White"/>
-                        <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center" Foreground="White"/>
-                    </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
-                        Width="50" Height="50" Background="Transparent" Foreground="White"/>
-                        <TextBlock Text="Button 2" FontSize="18" VerticalAlignment="Center" Foreground="White"/>
+                        <Button x:Name="MapBtn" FontFamily="Segoe MDL2 Assets" Content="&#xE909;" Width="50" Height="50" Background="Transparent" Foreground="White" Click="Arial3D_Click"/>
+                        <Button x:Name="MapLabel" Content="Map Arial 3D" FontSize="18" VerticalAlignment="Center" Background="Transparent" Foreground="White" Click="Arial3D_Click"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
-                        <ListView BorderBrush="#FF141EE4"  Grid.Row="3" x:Name="listBoxobj" SelectionChanged="listBoxobj_SelectionChanged">
+                    <StackPanel x:Name="LisPointsMenu" Orientation="Horizontal">
+                        <ListView x:Name="listBoxobj" SelectionChanged="listBoxobj_SelectionChanged">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid   ScrollViewer.VerticalScrollBarVisibility="Visible">
-                                        <Border Margin="5" BorderBrush="White" BorderThickness="0">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                </Grid.RowDefinitions>
-                                                <TextBlock Margin="35,0,0,0" x:Name="PointNameTxt" TextWrapping="Wrap" Text="{Binding pointName}" FontSize="18" Foreground="DarkGray" VerticalAlignment="Center"/>
-                                            </Grid>
-                                        </Border>
+                                    <Grid>
+                                        <Button x:Name="MapFindBtn" FontFamily="Segoe MDL2 Assets" Content="&#xE819;" Width="50" Height="50" Background="Transparent" Foreground="White"/>
+                                        <TextBlock Margin="55,0,0,0" x:Name="PointNameTxt" TextWrapping="Wrap" Text="{Binding pointName}" FontSize="18" Foreground="White" VerticalAlignment="Center" SelectionHighlightColor="#FF007ACC"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -64,7 +51,7 @@
                 <Maps:MapControl x:Name="mapWithMyLocation"
                              ZoomInteractionMode="GestureAndControl"
                              TiltInteractionMode="GestureAndControl"
-                             MapHolding="mapWithMyLocation_MapHolding"
+                             MapTapped="mapWithMyLocation_MapHolding"
                              MapServiceToken="BdXLS7E6SNZdhiVNWQzP~5ZaKLuzxAUJnSij-qCmJCw~AvuftOLSQhX-sgYwDxp-hcbUb0QaVEhGoFzYijoW44ilPgX5Y1dEVtgH3AEK2fEE"  ZoomLevel="8"  />
 
             </Grid>

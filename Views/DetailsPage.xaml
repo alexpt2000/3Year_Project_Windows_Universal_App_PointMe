@@ -36,22 +36,9 @@
             <StackPanel Grid.Row="2">
                 <Button Content="Delete" HorizontalAlignment="Stretch" Margin="10" Click="DeletePoint_Click"/>
                 <Button Content="Update" HorizontalAlignment="Stretch" Margin="10" Click="UpdatePoint_Click"/>
+                <Button Content="Cancel" HorizontalAlignment="Stretch" Margin="10" Click="ShowMap_Click"/>
             </StackPanel>
         </Grid>
-
-        <StackPanel Grid.Row="0">
-
-            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="º" FontFamily="Symbol" FontSize="24" Height="41" Width="47" Foreground="White" Background="Black">
-                <Button.Flyout>
-                    <MenuFlyout>
-                        <MenuFlyoutItem Text="Map" Click="ShowMap_Click"/>
-                    </MenuFlyout>
-                </Button.Flyout>
-            </Button>
-
-        </StackPanel>
-
-
 
     </Grid>
 

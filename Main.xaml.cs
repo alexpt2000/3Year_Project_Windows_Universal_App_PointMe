@@ -10,6 +10,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -78,8 +79,23 @@ namespace PointMe
 
         private void MyMap_Location(BasicGeoposition location)
         {
+            // Specify a known location.
+            Geopoint snPoint = new Geopoint(location);
+
+            // Create a MapIcon.
+            MapIcon mapIcon1 = new MapIcon();
+            mapIcon1.Location = snPoint;
+            mapIcon1.NormalizedAnchorPoint = new Point(0.5, 1.0);
+            mapIcon1.Title = "I'm here";
+            mapIcon1.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/customicon.png"));
+            mapIcon1.ZIndex = 0;
+
+            // Add the MapIcon to the map.
+            mapWithMyLocation.MapElements.Add(mapIcon1);
+
             mapWithMyLocation.Center = new Geopoint(location);
             mapWithMyLocation.ZoomLevel = 9;
+
         }
 
 
@@ -127,6 +143,7 @@ namespace PointMe
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+            
         }
 
 
@@ -141,6 +158,7 @@ namespace PointMe
             mapIcon1.Location = snPoint;
             mapIcon1.NormalizedAnchorPoint = new Point(0.5, 1.0);
             mapIcon1.Title = pointName;
+            //MapIcon1.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/customicon.png"));
             mapIcon1.ZIndex = 0;
 
             // Add the MapIcon to the map.
@@ -232,6 +250,27 @@ namespace PointMe
 
         }
 
+
+        private void RoadMap_Click(object sender, RoutedEventArgs e)
+        {
+            mapWithMyLocation.Style = MapStyle.Road;
+
+        }
+
+
+        private void Arial3D_Click(object sender, RoutedEventArgs e)
+        {
+            if (mapWithMyLocation.Style != MapStyle.Aerial3DWithRoads)
+            {
+                mapWithMyLocation.Style = MapStyle.Aerial3DWithRoads;
+                MapLabel.Content = "Map Road";
+            }
+            else {
+                mapWithMyLocation.Style = MapStyle.Road;
+                MapLabel.Content = "Map Arial 3D";
+            }      
+
+        }
 
     }
 }
