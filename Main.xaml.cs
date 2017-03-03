@@ -116,9 +116,6 @@ namespace PointMe
 
         private void ReadPointsList_Loaded(object sender, RoutedEventArgs e)
         {
-            //ReadAllPointsList dbcpoints = new ReadAllPointsList();
-            //BasicGeoposition location = new BasicGeoposition();
-
             DB_PointsList = dbcpoints.GetAllPoints();//Get all DB points 
 
             listBoxobj.ItemsSource = DB_PointsList.OrderByDescending(i => i.Id).ToList();//Binding DB data to LISTBOX and Latest points ID can Display first.  
@@ -164,23 +161,8 @@ namespace PointMe
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
-            //LisPointsMenu.Visibility = Visibility.Visible;
-
-            if (LisPointsMenu.Visibility == Visibility.Visible)
-            {
-                LisPointsMenu.Visibility = Visibility.Collapsed;
-            }
-            else {
-                LisPointsMenu.Visibility = Visibility.Visible;
-            }
 
         }
-
-        private void Grid_GotFocus(object sender, RoutedEventArgs e)
-        {
-            LisPointsMenu.Visibility = Visibility.Collapsed;
-        }
-
 
         private void AddMapIcon(BasicGeoposition location, string pointName)
         {
