@@ -36,6 +36,8 @@ namespace PointMe
         ReadAllPointsList dbcpoints = new ReadAllPointsList();
         BasicGeoposition location = new BasicGeoposition();
         DatabaseHelperClass Db_FindOne = new DatabaseHelperClass();
+        BasicGeoposition MyLocation = new BasicGeoposition();
+        
 
         public Main()
         {
@@ -53,13 +55,11 @@ namespace PointMe
                 case GeolocationAccessStatus.Allowed:
                     Geolocator geolocator = new Geolocator();
                     Geoposition locationGPS = await geolocator.GetGeopositionAsync();
+      
+                    MyLocation.Latitude = locationGPS.Coordinate.Latitude;
+                    MyLocation.Longitude = locationGPS.Coordinate.Longitude;
 
-                    BasicGeoposition location = new BasicGeoposition();
-
-                    location.Latitude = locationGPS.Coordinate.Latitude;
-                    location.Longitude = locationGPS.Coordinate.Longitude;
-
-                    MyMap_Location(location);
+                    MyMap_Location(MyLocation);
 
                     break;
 
@@ -175,7 +175,7 @@ namespace PointMe
             mapIcon1.Location = snPoint;
             mapIcon1.NormalizedAnchorPoint = new Point(0.5, 1.0);
             mapIcon1.Title = pointName;
-            //MapIcon1.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/customicon.png"));
+ 
             mapIcon1.ZIndex = 0;
 
             // Add the MapIcon to the map.
@@ -280,12 +280,12 @@ namespace PointMe
             if (mapWithMyLocation.Style != MapStyle.Aerial3DWithRoads)
             {
                 mapWithMyLocation.Style = MapStyle.Aerial3DWithRoads;
-                MapLabel.Content = "Map Road";
+                MapLabel.Text = "Map Road";
             }
             else
             {
                 mapWithMyLocation.Style = MapStyle.Road;
-                MapLabel.Content = "Map Arial 3D";
+                MapLabel.Text = "Map Arial 3D";
             }
 
         }

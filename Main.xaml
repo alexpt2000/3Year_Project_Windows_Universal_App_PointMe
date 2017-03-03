@@ -16,9 +16,23 @@
                 <StackPanel Background="#FF007ACC">
 
 
+
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="MapBtn" FontFamily="Segoe MDL2 Assets" Content="&#xE909;" Width="50" Height="50" Background="Transparent" Foreground="White" Click="Arial3D_Click"/>
-                        <Button x:Name="MapLabel" Content="Map Arial 3D" FontSize="18" VerticalAlignment="Center" Background="Transparent" Foreground="White" Click="Arial3D_Click"/>
+
+
+                        <Button Background="Transparent" Click="Arial3D_Click" >
+                            <StackPanel>
+                                <Grid>
+                                    <TextBlock x:Name="MapBtn" Grid.Column="0" FontFamily="Segoe MDL2 Assets" Text="&#xE909;" VerticalAlignment="Center" Foreground="White" />
+                                    <TextBlock x:Name="MapLabel" Grid.Column="1" Text="Map Arial 3D" Margin="30,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+                                </Grid>
+                            </StackPanel>
+                        </Button>
+
+
+
+                        <!-- <Button x:Name="MapBtn1" FontFamily="Segoe MDL2 Assets" Content="&#xE909;" Width="50" Height="50" Background="Transparent" Foreground="White" Click="Arial3D_Click"/>
+                        <Button x:Name="MapLabel" Content="Map Arial 3D" FontSize="18" VerticalAlignment="Center" Background="Transparent" Foreground="White" Click="Arial3D_Click"/> -->
                     </StackPanel>
 
                     <StackPanel x:Name="LisPointsMenu" Orientation="Horizontal">
