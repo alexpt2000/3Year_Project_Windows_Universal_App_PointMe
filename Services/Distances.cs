@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 
-namespace PointMe.System
+namespace PointMe.Services
 {
 
     /// <summary>  
@@ -13,19 +14,14 @@ namespace PointMe.System
     /// 
 
     public enum DistanceType { Miles, Kilometers };
+  
+    
+    
     /// <summary>  
     /// Specifies a Latitude / Longitude point.  
     /// </summary>  
-    /// 
 
-    public struct Position
-    {
-        public double Latitude;
-        public double Longitude;
-    }
-
-
-    class Haversine
+    class Distances
     {
 
         /// <summary>  
@@ -33,7 +29,7 @@ namespace PointMe.System
         /// latitude / longitude points.  
         /// </summary>  
 
-        public double Distance(Position pos1, Position pos2, DistanceType type)
+        public double Distance(BasicGeoposition pos1, BasicGeoposition pos2, DistanceType type)
         {
             double R = (type == DistanceType.Miles) ? 3960 : 6371;
             double dLat = this.toRadian(pos2.Latitude - pos1.Latitude);
@@ -45,6 +41,8 @@ namespace PointMe.System
             double d = R * c;
             return d;
         }
+
+
         /// <summary>  
         /// Convert to Radians.  
         /// </summary>  

@@ -1,4 +1,5 @@
-﻿using SqliteUWP.Model;
+﻿using PointMe.Services;
+using SqliteUWP.Model;
 using SqliteUWP.ViewModel;
 using SqliteUWP.Views;
 using System;
@@ -26,6 +27,8 @@ using Windows.UI.Xaml.Navigation;
 
 namespace PointMe
 {
+
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -37,15 +40,21 @@ namespace PointMe
         BasicGeoposition location = new BasicGeoposition();
         DatabaseHelperClass Db_FindOne = new DatabaseHelperClass();
         BasicGeoposition MyLocation = new BasicGeoposition();
-        
+
+
 
         public Main()
         {
             this.InitializeComponent();
             InitializeLocator();
-            this.Loaded += ReadPointsList_Loaded;
+            //this.Loaded += ReadPointsList_Loaded;
         }
 
+
+        /// <summary>  
+        /// It will interact with the user when requesting access 
+        /// authorization to use the location of the device.
+        /// </summary> 
         private async void InitializeLocator()
         {
             var userPermission = await Geolocator.RequestAccessAsync();
@@ -53,24 +62,34 @@ namespace PointMe
             switch (userPermission)
             {
                 case GeolocationAccessStatus.Allowed:
+
+                    //Get positions
                     Geolocator geolocator = new Geolocator();
                     Geoposition locationGPS = await geolocator.GetGeopositionAsync();
-      
+
                     MyLocation.Latitude = locationGPS.Coordinate.Latitude;
                     MyLocation.Longitude = locationGPS.Coordinate.Longitude;
 
+                    // Load all points on Map
+                    ReadPointsList_Loaded();
+
+                    // Point my location
                     MyMap_Location(MyLocation);
 
                     break;
 
                 case GeolocationAccessStatus.Denied:
                     msgDialog.Content = "I cannot check the location if you don't give me the access to your location...";
+
+                    // Show deault location
                     MyMap_Loaded();
                     await msgDialog.ShowAsync();
                     break;
 
                 case GeolocationAccessStatus.Unspecified:
                     msgDialog.Content = "I got an error while getting location permission. Please try again...";
+
+                    // Show deault location
                     MyMap_Loaded();
                     await msgDialog.ShowAsync();
                     break;
@@ -79,8 +98,13 @@ namespace PointMe
 
         }
 
+
+        /// <summary>  
+        /// Will show the current position with a custom icon
+        /// </summary> 
         private void MyMap_Location(BasicGeoposition location)
         {
+
             // Specify a known location.
             Geopoint snPoint = new Geopoint(location);
 
@@ -89,18 +113,25 @@ namespace PointMe
             mapIcon1.Location = snPoint;
             mapIcon1.NormalizedAnchorPoint = new Point(0.5, 1.0);
             mapIcon1.Title = "I'm here";
+
+            // Geting custon Icon
             mapIcon1.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/customicon.png"));
             mapIcon1.ZIndex = 0;
 
             // Add the MapIcon to the map.
             mapWithMyLocation.MapElements.Add(mapIcon1);
 
+            // Centre and zoom Me
             mapWithMyLocation.Center = new Geopoint(location);
             mapWithMyLocation.ZoomLevel = 9;
 
         }
 
 
+        /// <summary>  
+        /// If the location is not available or the user does not 
+        /// authorize, the map will have a defult location. 
+        /// </summary> 
         private void MyMap_Loaded()
         {
             BasicGeoposition location = new BasicGeoposition();
@@ -113,8 +144,10 @@ namespace PointMe
         }
 
 
-
-        private void ReadPointsList_Loaded(object sender, RoutedEventArgs e)
+        /// <summary>  
+        /// Popular object with points and send to the screen display(Map). 
+        /// </summary> 
+        private void ReadPointsList_Loaded()
         {
             DB_PointsList = dbcpoints.GetAllPoints();//Get all DB points 
 
@@ -125,66 +158,99 @@ namespace PointMe
                 location.Latitude = Double.Parse(data.latitude);
                 location.Longitude = Double.Parse(data.longitude);
 
+                // Add an Icon for each location
                 AddMapIcon(location, data.pointName);
             }
 
-            
+
         }
 
+
+        /// <summary>  
+        ///  When you select an icon in the points list, the location of the selected 
+        ///  item will be sent to the map, the selected point will be centered on the 
+        ///  map and the zoom will be applied.
+        /// </summary>
         private void listPoint_SelectionChanged(object sender, RoutedEventArgs e)
         {
+            // Get id by button after parse as int
             Button myId = (Button)sender;
             string myIdString = myId.CommandParameter.ToString();
             int value = Int32.Parse(myIdString);
 
+            // Location on Database
             Points listitem = Db_FindOne.ReadPoint(value) as Points;
 
+            // Get location as string and parse as Double
             BasicGeoposition location = new BasicGeoposition();
             location.Latitude = Double.Parse(listitem.latitude);
             location.Longitude = Double.Parse(listitem.longitude);
+
+            // Centre and Zoom
             mapWithMyLocation.Center = new Geopoint(location);
             mapWithMyLocation.ZoomLevel = 15;
 
         }
 
+
+        /// <summary>  
+        ///  When you select a name in the points list, the id of the selected item 
+        ///  will be sent to the details page to Delete or Refresh.
+        /// </summary>
         private void listBoxobj_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-
-            if (listBoxobj.SelectedIndex != -1)
+           if (listBoxobj.SelectedIndex != -1)
             {
                 Points listitem = listBoxobj.SelectedItem as Points;//Get slected listbox item points ID
+
+                // Send details page and pass the object listitem
                 Frame.Navigate(typeof(DetailsPage), listitem);
             }
         }
 
+        /// <summary>  
+        /// Open or close the side menu 
+        /// </summary> 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
 
         }
 
+
+        /// <summary>  
+        /// Add Icon on the map, based on the location stored in the database 
+        /// </summary> 
         private void AddMapIcon(BasicGeoposition location, string pointName)
         {
 
             // Specify a known location.
             Geopoint snPoint = new Geopoint(location);
 
+            // instance class Distances on Services
+            Distances distance = new Distances();
+
+            // Passing Locations to Get distances
+            double dist = distance.Distance(location, MyLocation, DistanceType.Kilometers);
+
             // Create a MapIcon.
             MapIcon mapIcon1 = new MapIcon();
             mapIcon1.Location = snPoint;
             mapIcon1.NormalizedAnchorPoint = new Point(0.5, 1.0);
-            mapIcon1.Title = pointName;
- 
+            mapIcon1.Title = pointName + "\n" + dist.ToString("0.##") + " Km"; //Add name on Icon and format distance two decimal point
+
             mapIcon1.ZIndex = 0;
 
             // Add the MapIcon to the map.
             mapWithMyLocation.MapElements.Add(mapIcon1);
+
         }
 
 
-
-        private async void mapWithMyLocation_MapHolding(MapControl sender, MapInputEventArgs args)
+        /// <summary>  
+        /// Save the position where the map was clicked   
+        /// </summary>  
+        private async void mapWithMyLocation_MapClick(MapControl sender, MapInputEventArgs args)
         {
             BasicGeoposition tappedGeoPosition = args.Location.Position;
 
@@ -242,17 +308,8 @@ namespace PointMe
 
                     AddMapIcon(tappedGeoPosition, PointName.Text);
                 }
-                else
-                {
-                    //MessageDialog messageDialog = new MessageDialog("Please fill the field Point Name");//Text should not be empty  
-                    //await messageDialog.ShowAsync();
-                }
-
 
             };
-
-            // Close the app if the user doesn't insert the point
-            //_pointDialog.SecondaryButtonClick += delegate { Application.Current.Exit(); };
 
             // Set the binding to enable/disable the accept button 
 
@@ -268,15 +325,12 @@ namespace PointMe
         }
 
 
-        private void RoadMap_Click(object sender, RoutedEventArgs e)
-        {
-            mapWithMyLocation.Style = MapStyle.Road;
-
-        }
-
-
+        /// <summary>  
+        /// Change the map Style, Aerial3D or Road  
+        /// </summary>  
         private void Arial3D_Click(object sender, RoutedEventArgs e)
         {
+            // Verify actual select map Style
             if (mapWithMyLocation.Style != MapStyle.Aerial3DWithRoads)
             {
                 mapWithMyLocation.Style = MapStyle.Aerial3DWithRoads;
@@ -290,6 +344,13 @@ namespace PointMe
 
         }
 
-
+        /// <summary>  
+        /// Will center my actual position on map  
+        /// </summary>  
+        private void WhereIam_Click(object sender, RoutedEventArgs e)
+        {
+            mapWithMyLocation.Center = new Geopoint(MyLocation);
+            mapWithMyLocation.ZoomLevel = 15;
+        }
     }
 }

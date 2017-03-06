@@ -18,8 +18,6 @@
 
 
                     <StackPanel Orientation="Horizontal">
-
-
                         <Button Background="Transparent" Click="Arial3D_Click" >
                             <StackPanel>
                                 <Grid>
@@ -28,11 +26,17 @@
                                 </Grid>
                             </StackPanel>
                         </Button>
+                    </StackPanel>
 
-
-
-                        <!-- <Button x:Name="MapBtn1" FontFamily="Segoe MDL2 Assets" Content="&#xE909;" Width="50" Height="50" Background="Transparent" Foreground="White" Click="Arial3D_Click"/>
-                        <Button x:Name="MapLabel" Content="Map Arial 3D" FontSize="18" VerticalAlignment="Center" Background="Transparent" Foreground="White" Click="Arial3D_Click"/> -->
+                    <StackPanel Orientation="Horizontal">
+                        <Button Background="Transparent" Click="WhereIam_Click" >
+                            <StackPanel>
+                                <Grid>
+                                    <TextBlock x:Name="MyLocationBtn" Grid.Column="0" FontFamily="Segoe MDL2 Assets" Text="&#xE707;" VerticalAlignment="Center" Foreground="White" />
+                                    <TextBlock x:Name="MyLocationBtn1" Grid.Column="1" Text="Where I am" Margin="30,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+                                </Grid>
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
 
                     <StackPanel x:Name="LisPointsMenu" Orientation="Horizontal">
@@ -54,13 +58,17 @@
         </SplitView.Pane>
         <SplitView.Content>
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="61*"/>
+                    <RowDefinition Height="259*"/>
+                </Grid.RowDefinitions>
                 <Maps:MapControl x:Name="mapWithMyLocation"
                              ZoomInteractionMode="GestureAndControl"
                              TiltInteractionMode="GestureAndControl"
-                             MapTapped="mapWithMyLocation_MapHolding"
-                             MapServiceToken="BdXLS7E6SNZdhiVNWQzP~5ZaKLuzxAUJnSij-qCmJCw~AvuftOLSQhX-sgYwDxp-hcbUb0QaVEhGoFzYijoW44ilPgX5Y1dEVtgH3AEK2fEE"  ZoomLevel="8"/>
+                             MapTapped="mapWithMyLocation_MapClick"
+                             MapServiceToken="BdXLS7E6SNZdhiVNWQzP~5ZaKLuzxAUJnSij-qCmJCw~AvuftOLSQhX-sgYwDxp-hcbUb0QaVEhGoFzYijoW44ilPgX5Y1dEVtgH3AEK2fEE"  ZoomLevel="8" Grid.RowSpan="2"/>
 
-                <StackPanel Grid.Row="0">
+                <StackPanel Grid.Row="0" Grid.RowSpan="2">
 
                     <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="&#xE700;" FontFamily="Segoe MDL2 Assets" FontSize="24" Height="50" Width="50" Foreground="White" Background="Black" Click="HamburgerButton_Click"/>
 

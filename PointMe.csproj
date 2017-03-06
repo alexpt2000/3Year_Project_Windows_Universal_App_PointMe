@@ -99,22 +99,13 @@
     <Compile Include="Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Model\Points.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="System\Haversine.cs" />
+    <Compile Include="Services\Distances.cs" />
     <Compile Include="ViewModel\DatabaseHelperClass.cs" />
     <Compile Include="ViewModel\ReadAllPointsList.cs" />
-    <Compile Include="Views\AddPage.xaml.cs">
-      <DependentUpon>AddPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ListPoints.xaml.cs">
-      <DependentUpon>ListPoints.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -143,21 +134,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\AddPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\DetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ListPoints.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
