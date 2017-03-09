@@ -7,7 +7,11 @@ The user must first accept that the device obtains its location.
 
 Clicking on the point chosen by the user on the map will show a dialog box in which the user can then enter the name of the point and also some additional information.
 
-Now the user can access the saved points by clicking on the button in the upper left corner of the screen and the list with all saved points will be displayed.
+Now the user can access the saved points by clicking on the button in the top left corner of the screen and the list with all saved points will be displayed.
+
+By clicking on the left side of the icon on the left side of the point name, the point will be displayed in the center of the map.
+
+Clicking on the point name will display a dialog box, which you can modify or delete from the list.
 
 
 
