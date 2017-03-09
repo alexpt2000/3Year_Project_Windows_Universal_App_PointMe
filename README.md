@@ -1,4 +1,4 @@
-## PointMe
+# PointMe
 This application allows the user to save their favorite points, and also displays the current location, also showing the distance between your location and the points that are on your favorites list.
 
 
