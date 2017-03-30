@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="2b14176f-400b-47b5-bf89-8d940a4ad35d" Publisher="CN=Alexander Souza" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="2b14176f-400b-47b5-bf89-8d940a4ad35d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="29064AlexanderSouza.PointMe" Publisher="CN=8D3A0E4A-A595-4CFF-B301-29CAD5A84726" Version="1.1.2.0" />
+  <mp:PhoneIdentity PhoneProductId="a9c1d6eb-81b4-4269-a9aa-7681f91707a1" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>PointMe</DisplayName>
     <PublisherDisplayName>Alexander Souza</PublisherDisplayName>
