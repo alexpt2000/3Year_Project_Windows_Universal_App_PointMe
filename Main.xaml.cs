@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -41,12 +42,17 @@ namespace PointMe
         DatabaseHelperClass Db_FindOne = new DatabaseHelperClass();
         BasicGeoposition MyLocation = new BasicGeoposition();
 
+        BasicGeoposition ShareLocation = new BasicGeoposition();
+        String ShareName;
+
 
 
         public Main()
         {
             this.InitializeComponent();
             InitializeLocator();
+            Windows.ApplicationModel.DataTransfer.DataTransferManager.GetForCurrentView().DataRequested += MainPage_DataRequested;
+
             //this.Loaded += ReadPointsList_Loaded;
         }
 
@@ -351,6 +357,37 @@ namespace PointMe
         {
             mapWithMyLocation.Center = new Geopoint(MyLocation);
             mapWithMyLocation.ZoomLevel = 15;
+        }
+
+
+        private void Share_Click(object sender, RoutedEventArgs e)
+        {
+            // Get id by button after parse as int
+            Button myId = (Button)sender;
+            string myIdString = myId.CommandParameter.ToString();
+            int value = Int32.Parse(myIdString);
+
+            // Location on Database
+            Points listitem = Db_FindOne.ReadPoint(value) as Points;
+
+            // Get location as string and parse as Double
+            //BasicGeoposition location = new BasicGeoposition();
+            ShareLocation.Latitude = Double.Parse(listitem.latitude);
+            ShareLocation.Longitude = Double.Parse(listitem.longitude);
+            ShareName = listitem.pointName;
+
+            Windows.ApplicationModel.DataTransfer.DataTransferManager.ShowShareUI();
+
+        }
+
+        void MainPage_DataRequested(Windows.ApplicationModel.DataTransfer.DataTransferManager sender, Windows.ApplicationModel.DataTransfer.DataRequestedEventArgs args)
+        {
+
+            args.Request.Data.SetText("https://maps.google.com/maps?q=" + ShareLocation.Latitude.ToString() + "," + ShareLocation.Longitude.ToString());
+
+            args.Request.Data.Properties.Title = ShareName;
+            
+ 
         }
     }
 }

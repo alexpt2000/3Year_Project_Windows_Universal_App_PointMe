@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
-               CompactPaneLength="0" OpenPaneLength="250">
+               CompactPaneLength="0" OpenPaneLength="290">
 
         <SplitView.Pane>
             <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -45,7 +45,8 @@
                                 <DataTemplate>
                                     <Grid>
                                         <Button x:Name="MapFindBtn" FontFamily="Segoe MDL2 Assets" Content="&#xE819;" Width="50" Height="50" Background="Transparent" Foreground="White" CommandParameter="{Binding Id}"  Click="listPoint_SelectionChanged"/>
-                                        <TextBlock Margin="55,0,0,0" x:Name="PointNameTxt" TextWrapping="Wrap" Text="{Binding pointName}" FontSize="18" Foreground="White" VerticalAlignment="Center" SelectionHighlightColor="#FF007ACC"/>
+                                        <Button Margin="50,0,0,0" x:Name="ShareBtn3" FontFamily="Segoe MDL2 Assets" Content="&#xE72D;" Width="50" Height="50" Background="Transparent" Foreground="White" CommandParameter="{Binding Id}"  Click="Share_Click"/>
+                                        <TextBlock Margin="110,0,0,0" x:Name="PointNameTxt" TextWrapping="Wrap" Text="{Binding pointName}" FontSize="18" Foreground="White" VerticalAlignment="Center" SelectionHighlightColor="#FF007ACC"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
