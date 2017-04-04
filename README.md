@@ -30,4 +30,4 @@ Clicking on the point name will display a dialog box, which you can modify or de
 ![](https://github.com/alexpt2000gmit/3Year_Project_Windows_Universal_App_PointMe/blob/master/screenshot/MapMode.gif)
 
 ## Share a Point
-![](https://github.com/alexpt2000gmit/3Year_Project_Windows_Universal_App_PointMe/blob/master/screenshot/Share.gif
+![](https://github.com/alexpt2000gmit/3Year_Project_Windows_Universal_App_PointMe/blob/master/screenshot/Share.gif)
