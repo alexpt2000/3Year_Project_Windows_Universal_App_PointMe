@@ -9,7 +9,7 @@ A Universal Windows app is built upon Universal Windows Platform (UWP), which wa
 
 ![](https://www.tutorialspoint.com/windows10_development/images/universal_windows_platform.jpg)
 
-## SQLite
+## Database - SQLite
 ### What is SQLite?
 SQLite is a software library that implements a self-contained, server less, zero-configuration, transactional SQL database engine.
 
@@ -27,6 +27,8 @@ The following are the advantages of SQLite −
 * It is reliable.
 * No need for any setup and installation.
 * It has no dependencies.
+
+![](https://www.tutorialspoint.com/windows10_development/images/uwp_sqlite_extension_update.jpg)
 
 
 # The Project
