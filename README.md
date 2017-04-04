@@ -1,4 +1,9 @@
-# PointMe
+# The Project
+3 Year Project Windows Universal App
+
+[Project Requirements - PDF](https://github.com/alexpt2000gmit/3Year_Project_Windows_Universal_App_PointMe/blob/master/Year%203%20-%20Mobile%20Applications.pdf)
+
+## PointMe
 ![](https://github.com/alexpt2000gmit/3Year_Project_Windows_Universal_App_PointMe/blob/master/screenshot/Map.png)
 
 This application allows the user to save their favorite points, and also displays the current location, also showing the distance between your location and the points that are on your favorites list.
