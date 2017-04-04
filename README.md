@@ -14,5 +14,20 @@ By clicking on the left side of the icon on the left side of the point name, the
 Clicking on the point name will display a dialog box, which you can modify or delete from the list.
 
 
+## Requiring Location Access
+![](https://github.com/alexpt2000gmit/3Year_Project_Windows_Universal_App_PointMe/blob/master/screenshot/AccessLocation.gif)
 
-![](https://github.com/alexpt2000gmit/3Year_Project_Windows_Universal_App_PointMe/blob/master/screenshot/screencast.gif?raw=true)
+## Adding a point
+![](https://github.com/alexpt2000gmit/3Year_Project_Windows_Universal_App_PointMe/blob/master/screenshot/AddPoint.gif)
+
+## Update or Delete 
+![](https://github.com/alexpt2000gmit/3Year_Project_Windows_Universal_App_PointMe/blob/master/screenshot/UpdateDelete.gif)
+
+## Selecting a point
+![](https://github.com/alexpt2000gmit/3Year_Project_Windows_Universal_App_PointMe/blob/master/screenshot/findLocation.gif)
+
+## Map Mode
+![](https://github.com/alexpt2000gmit/3Year_Project_Windows_Universal_App_PointMe/blob/master/screenshot/MapMode.gif)
+
+## Share a Point
+![](https://github.com/alexpt2000gmit/3Year_Project_Windows_Universal_App_PointMe/blob/master/screenshot/Share.gif
