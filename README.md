@@ -7,7 +7,7 @@ This application allows the user to save their favorite points, and also display
 ## How it works?
 *The user must first accept that the device obtains its location.
 
-*Clicking on the point chosen by the user on the map will show a dialog box in which the user can then enter the name of the point and also some additional information.
+* Clicking on the point chosen by the user on the map will show a dialog box in which the user can then enter the name of the point and also some additional information.
 
 *Now the user can access the saved points by clicking on the button in the top left corner of the screen and the list with all saved points will be displayed.
 
