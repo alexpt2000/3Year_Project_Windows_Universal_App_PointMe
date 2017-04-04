@@ -120,12 +120,15 @@
     <None Include="PointMe_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="screenshot\Share.gif" />
+    <Content Include="screenshot\UpdateDelete.gif" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Assets\BadgeLogo.scale-100.png" />
     <Content Include="Assets\BadgeLogo.scale-125.png" />
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\customicon.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
@@ -172,6 +175,10 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
+    <Content Include="screenshot\AccessLocation.gif" />
+    <Content Include="screenshot\AddPoint.gif" />
+    <Content Include="screenshot\findLocation.gif" />
+    <Content Include="screenshot\MapMode.gif" />
     <Content Include="screenshot\screencast.gif" />
   </ItemGroup>
   <ItemGroup>
